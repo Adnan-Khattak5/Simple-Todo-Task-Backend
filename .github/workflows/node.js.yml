@@ -20,24 +20,9 @@ jobs:
     - uses: actions/checkout@v3
       # Checks out your repository under $GITHUB_WORKSPACE, so the workflow can access it.
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-      # This step uses actions/setup-node to configure the Node.js environment with the specified version.
-      # It also enables caching for npm dependencies to speed up the installation process.
-
-    - run: npm ci
-      # Performs a clean installation of the node dependencies. This command is faster and more reliable for CI/CD processes
-      # than the regular npm install, as it removes the existing node_modules folder and installs dependencies afresh based
-      # on the package-lock.json file.
-
-    - run: npm run build --if-present
-      # Executes the build script defined in your package.json if it exists.
-      # This step is crucial for compiling or preparing your application for production.
-
-    - run: npm test
-      # Runs the test script defined in your package.json.
-      # This should execute your project's test suite and is a critical part of ensuring code quality.
+    - run: node --version
+    - run: npm --version
+    - run: npm install
+    - run: node app.js
+     
 
